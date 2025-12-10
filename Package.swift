@@ -18,7 +18,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/backslash-f/applogger",
+            url: "https://github.com/thatfactory/applogger",
             from: "0.1.0"
         )
     ],

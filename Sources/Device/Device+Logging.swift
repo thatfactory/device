@@ -22,7 +22,7 @@ public extension Device {
     /// in the *macOS Console app*.
     ///
     /// In the **macOS Console app**, you can filter Device's output by
-    /// `SUBSYSTEM`: `com.backslash-f.Device`.
+    /// `SUBSYSTEM`: `com.thatfactory.Device`.
     func enableLogging() {
         isLoggingEnabled = true
     }
@@ -46,7 +46,7 @@ internal extension Device {
         guard isLoggingEnabled else {
             return
         }
-        let subsystem = "com.backslash-f.Device"
+        let subsystem = "com.thatfactory.Device"
         let logger = AppLogger(subsystem: subsystem, category: category.rawValue)
         logger.log(information)
     }

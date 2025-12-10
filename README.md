@@ -91,7 +91,7 @@ Property | Description
 API | Description
 --- | -----------
 `disableLogging()` | Disables logging output.
-`enableLogging()` | Enables logging output via [AppLogger](https://github.com/backslash-f/applogger).
+`enableLogging()` | Enables logging output via [AppLogger](https://github.com/thatfactory/applogger).
 `os()` | Returns the operating system version based on `-[NSProcessInfo operatingSystemVersionString]` and `-[NSProcessInfo operatingSystemVersion]`.
 `type()` | Returns the type of the device based on the result of the `os()` and `targetEnvironment()` functions.
 

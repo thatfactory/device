@@ -1,7 +1,7 @@
 import XCTest
 @testable import Device
 
-final class DeviceTests: XCTestCase {
+@MainActor final class DeviceTests: XCTestCase {
 
     func testIsLoggingEnabledByDefault() {
         XCTAssertTrue(Device().isLoggingEnabled)
@@ -24,10 +24,4 @@ final class DeviceTests: XCTestCase {
         XCTAssertTrue(osVersion.minor >= 0, "The minor version isn't equal or greater than zero.")
         XCTAssertTrue(osVersion.patch >= 0, "The patchVersion version isn't equal or greater than zero.")
     }
-
-    static var allTests = [
-        ("testIsLoggingEnabledByDefault", testIsLoggingEnabledByDefault),
-        ("testRetrieveDeviceType", testRetrieveDeviceType),
-        ("testRetrieveDeviceOS", testRetrieveDeviceOS)
-    ]
 }

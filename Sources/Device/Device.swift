@@ -2,7 +2,7 @@ import SwiftUI
 import Combine
 
 /// Retrieves information about a host device.
-public class Device {
+@MainActor public class Device {
 
     // MARK: - Properties
 

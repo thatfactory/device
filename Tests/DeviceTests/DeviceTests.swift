@@ -10,7 +10,7 @@ import XCTest
     func testRetrieveDeviceType() {
         let device = Device()
         switch device.type() {
-        case .mac(isCatalyst: false), .unknow:
+        case .mac(isCatalyst: false), .unknown:
             XCTAssert(true)
         default:
             XCTFail("Expected OS to be \"Mac\" (not Catalyst) or \"Unknown\"")

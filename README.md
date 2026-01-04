@@ -76,7 +76,7 @@ case .mac(isCatalyst: true):
     // Do Catalyst stuff
 case .watch:
     // Do Watch stuff
-case .unknow:
+case .unknown:
     // Do Unknown stuff
 }
 ```

@@ -7,7 +7,8 @@ public enum DeviceType: Equatable {
     case mac(isCatalyst: Bool = false)
     case tv
     case watch
-    case unknow
+    case vision
+    case unknown
 }
 
 public extension Device {
@@ -37,6 +38,8 @@ public extension Device {
         #else
             deviceType = UIDevice.current.userInterfaceIdiom == .pad ? .iPad : .iPhone
         #endif
+        #elseif os(visionOS)
+            deviceType = .vision
         #else
             deviceType = .unknown
         #endif

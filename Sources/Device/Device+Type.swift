@@ -11,7 +11,35 @@ public enum DeviceType: Equatable {
     case unknown
 }
 
+public extension DeviceType {
+
+    /// Returns a stable user-facing label for the platform.
+    var platformDisplayName: String {
+        switch self {
+        case .iPhone, .iPad:
+            return "iOS"
+        case .mac(isCatalyst: false):
+            return "macOS"
+        case .mac(isCatalyst: true):
+            return "Mac Catalyst"
+        case .tv:
+            return "tvOS"
+        case .watch:
+            return "watchOS"
+        case .vision:
+            return "visionOS"
+        case .unknown:
+            return "Unknown"
+        }
+    }
+}
+
 public extension Device {
+
+    /// Returns the current host device type.
+    static func currentType() -> DeviceType {
+        Device().type()
+    }
 
     /// Returns the `DeviceType`, based on the result of the `os()` and `targetEnvironment()` functions.
     ///

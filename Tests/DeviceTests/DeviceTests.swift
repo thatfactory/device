@@ -24,4 +24,23 @@ import XCTest
         XCTAssertTrue(osVersion.minor >= 0, "The minor version isn't equal or greater than zero.")
         XCTAssertTrue(osVersion.patch >= 0, "The patchVersion version isn't equal or greater than zero.")
     }
+
+    func testCurrentTypeReturnsKnownCase() {
+        let currentType = Device.currentType()
+        switch currentType {
+        case .iPhone, .iPad, .mac, .tv, .watch, .vision, .unknown:
+            XCTAssertTrue(true)
+        }
+    }
+
+    func testPlatformDisplayNameMapping() {
+        XCTAssertEqual(DeviceType.iPhone.platformDisplayName, "iOS")
+        XCTAssertEqual(DeviceType.iPad.platformDisplayName, "iOS")
+        XCTAssertEqual(DeviceType.mac(isCatalyst: false).platformDisplayName, "macOS")
+        XCTAssertEqual(DeviceType.mac(isCatalyst: true).platformDisplayName, "Mac Catalyst")
+        XCTAssertEqual(DeviceType.tv.platformDisplayName, "tvOS")
+        XCTAssertEqual(DeviceType.watch.platformDisplayName, "watchOS")
+        XCTAssertEqual(DeviceType.vision.platformDisplayName, "visionOS")
+        XCTAssertEqual(DeviceType.unknown.platformDisplayName, "Unknown")
+    }
 }

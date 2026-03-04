@@ -84,6 +84,13 @@ case .unknown:
 }
 ```
 
+### Current Platform Label
+```swift
+let currentType = Device.currentType()
+let platformLabel = currentType.platformDisplayName
+// Example: "iOS", "tvOS", "macOS"
+```
+
 ## Available Properties
 Property | Description
 -------- | -----------
@@ -97,6 +104,8 @@ API | Description
 `enableLogging()` | Enables logging output via [AppLogger](https://github.com/thatfactory/applogger).
 `os()` | Returns the operating system version based on `-[NSProcessInfo operatingSystemVersionString]` and `-[NSProcessInfo operatingSystemVersion]`.
 `type()` | Returns the type of the device based on the result of the `os()` and `targetEnvironment()` functions.
+`currentType()` | Returns the current `DeviceType` without manually creating a `Device` instance.
+`platformDisplayName` | Returns a stable user-facing platform label from a `DeviceType`.
 
 ## Integration
 ### Xcode

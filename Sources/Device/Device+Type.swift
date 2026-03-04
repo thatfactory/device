@@ -1,19 +1,31 @@
-import SwiftUI
+import Foundation
 
-/// The type of the device, e.g: `.iPhone`, `.mac(isCatalyst: false)`, `.tv`, etc.
+#if canImport(UIKit)
+import UIKit
+#endif
+
+/// A host device category.
 public enum DeviceType: Equatable {
-    case iPhone
     case iPad
+    case iPhone
     case mac(isCatalyst: Bool = false)
     case tv
-    case watch
-    case vision
     case unknown
+    case vision
+    case watch
 }
 
 public extension DeviceType {
 
-    /// Returns a stable user-facing label for the platform.
+    /// A stable user-facing platform label.
+    ///
+    /// ```swift
+    /// import Device
+    ///
+    /// let currentType = Device.currentType()
+    /// let platformLabel = currentType.platformDisplayName
+    /// // Example values: "iOS", "tvOS", "macOS".
+    /// ```
     var platformDisplayName: String {
         switch self {
         case .iPhone, .iPad:
@@ -36,22 +48,47 @@ public extension DeviceType {
 
 public extension Device {
 
-    /// Returns the current host device type.
+    /// Returns the current host device type without creating a `Device` instance manually.
+    ///
+    /// ```swift
+    /// import Device
+    ///
+    /// let currentType = Device.currentType()
+    /// ```
+    ///
+    /// - Returns: The current host `DeviceType`.
     static func currentType() -> DeviceType {
         Device().type()
     }
 
-    /// Returns the `DeviceType`, based on the result of the `os()` and `targetEnvironment()` functions.
+    /// Returns the current host device type.
     ///
-    /// Originally, the documentation for the `os()` function and `Preprocessor Directives` (AKA *Conditional
-    /// Compilation Directives*), could be found in this book: *"Using Swift with Cocoa and Objective-C"*; but the book
-    /// is [no longer updated / published](https://forums.developer.apple.com/thread/113777). (A copy can be seen
-    /// [here](http://bit.ly/35RktOj)). It could be here at some point:
-    /// [Apple Swift Documentation](https://developer.apple.com/documentation/swift) -- however I couldn't find any
-    /// updated reference to it there.
+    /// ```swift
+    /// import Device
     ///
-    /// There's also [a great NSHipster post](https://nshipster.com/swift-system-version-checking/) regarding this
-    /// subject.
+    /// let device = Device()
+    ///
+    /// switch device.type() {
+    /// case .iPhone:
+    ///     break
+    /// case .iPad:
+    ///     break
+    /// case .tv:
+    ///     break
+    /// case .mac(isCatalyst: false):
+    ///     break
+    /// case .mac(isCatalyst: true):
+    ///     break
+    /// case .watch:
+    ///     break
+    /// case .vision:
+    ///     break
+    /// case .unknown:
+    ///     break
+    /// }
+    /// ```
+    ///
+    /// - Returns: A `DeviceType` value for the current runtime platform.
     func type() -> DeviceType {
         let deviceType: DeviceType
         #if os(tvOS)

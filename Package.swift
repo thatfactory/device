@@ -18,6 +18,10 @@ let package = Package(
     ],
     dependencies: [
         .package(
+            url: "https://github.com/swiftlang/swift-docc-plugin",
+            from: "1.4.5"
+        ),
+        .package(
             url: "https://github.com/thatfactory/applogger",
             from: "0.1.0"
         )

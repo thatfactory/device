@@ -1,27 +1,58 @@
-import SwiftUI
 import Combine
+import SwiftUI
 
 /// Retrieves information about a host device.
+///
+/// Use ``Device`` to inspect the current platform, operating system version,
+/// orientation, and screen size.
 @MainActor public class Device {
 
     // MARK: - Properties
 
     #if os(iOS) || targetEnvironment(macCatalyst)
-    /// Subscribe to this variable to keep track of the orientation changes of the device.
+    /// The current interface orientation.
+    ///
+    /// This property is updated whenever
+    /// `UIDevice.orientationDidChangeNotification` is posted.
+    ///
+    /// ```swift
+    /// import Combine
+    /// import Device
+    ///
+    /// let device = Device()
+    /// let currentOrientation = device.orientation
+    ///
+    /// var cancellables = Set<AnyCancellable>()
+    /// device.$orientation
+    ///     .sink { orientation in
+    ///         switch orientation {
+    ///         case .portrait:
+    ///             // Do portrait-specific work.
+    ///             break
+    ///         case .landscapeRight:
+    ///             // Do landscape-specific work.
+    ///             break
+    ///         default:
+    ///             // Handle other orientations.
+    ///             break
+    ///         }
+    ///     }
+    ///     .store(in: &cancellables)
+    /// ```
+    @available(iOS 14.0, macCatalyst 14.0, *)
     @Published public var orientation: UIDeviceOrientation = UIDevice.current.orientation
     #endif
 
     #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
-    /// Returns the device's screen size in **points**.
+    /// Returns the device screen bounds in points.
     ///
-    /// From Apple's documentation:
+    /// ```swift
+    /// import Device
     ///
-    /// - `iOS` and `macCatalyst` This rectangle is specified in the current coordinate space, which takes into
-    /// account any interface rotations in effect for the device. Therefore, the value of this property may change when
-    /// the device rotates between portrait and landscape orientations.
-    ///
-    /// - `tvOS:` This rectangle is based on the device in a portrait-up orientation. This value does not change as
-    /// the device rotates.
+    /// let device = Device()
+    /// let screenSize = device.screenSize
+    /// ```
+    @available(iOS 14.0, tvOS 14.0, macCatalyst 14.0, *)
     public var screenSize: CGRect {
         UIScreen.main.bounds
     }
@@ -29,13 +60,16 @@ import Combine
 
     // MARK: Internal Properties
 
-    /// Enables / disables logging output to both *Xcode's Console* and the macOS *Console app*. `true` by default.
+    /// Enables or disables logging output to both Xcode's Console and the
+    /// macOS Console app.
     internal var isLoggingEnabled: Bool = true
 
     internal var cancellableNotifications = Set<AnyCancellable>()
 
     // MARK: - Lifecycle
 
+    /// Creates a new `Device` value and starts listening for orientation changes
+    /// on supported platforms.
     public init() {
         #if os(iOS) || targetEnvironment(macCatalyst)
         listenToOrientationChangeNotifications()

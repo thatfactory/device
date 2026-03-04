@@ -1,13 +1,13 @@
-import SwiftUI
+import Foundation
 import AppLogger
 
-/// `Device` logging categories to further distinguish the running parts of the package.
+/// `Device` logging categories used to group log output.
 ///
-/// Refer to: https://developer.apple.com/documentation/os/logging
+/// Refer to [Apple logging documentation](https://developer.apple.com/documentation/os/logging).
 public enum DeviceLoggingCategory: String {
-    case type           = "Device_Type"
-    case notification   = "Device_Notification"
-    case os             = "Device_OS"
+    case notification = "Device_Notification"
+    case os = "Device_OS"
+    case type = "Device_Type"
 }
 
 // MARK: - Interface
@@ -18,11 +18,8 @@ public extension Device {
 
     /// Enables logging output via `AppLogger`.
     ///
-    /// When logging is enabled, the output will be available in *Xcode's Console* or
-    /// in the *macOS Console app*.
-    ///
-    /// In the **macOS Console app**, you can filter Device's output by
-    /// `SUBSYSTEM`: `com.thatfactory.Device`.
+    /// When logging is enabled, output is available in Xcode's Console and in
+    /// the macOS Console app under subsystem `com.thatfactory.Device`.
     func enableLogging() {
         isLoggingEnabled = true
     }
@@ -37,11 +34,11 @@ public extension Device {
 
 internal extension Device {
 
-    /// Logs the given `String` information via `AppLogger`.
+    /// Logs the given text through `AppLogger`.
     ///
     /// - Parameters:
-    ///   - information: The `String` to be logged.
-    ///   - category: A member of the `DeviceLoggingCategory` enum.
+    ///   - information: The text to log.
+    ///   - category: The logging category.
     func log(information: String, category: DeviceLoggingCategory) {
         guard isLoggingEnabled else {
             return
@@ -51,7 +48,9 @@ internal extension Device {
         logger.log(information)
     }
 
-    /// Logs the given `Notification` via `AppLogger`.
+    /// Logs the given notification through `AppLogger`.
+    ///
+    /// - Parameter notification: The notification to log.
     func log(notification: Notification) {
         log(information: "Received notification: \(notification)", category: .notification)
     }

@@ -5,3 +5,7 @@
 *.xcworkspace
 xcuserdata/
 Package.resolved
+DerivedData/
+.swiftpm/configuration/registries.json
+.netrc
+/public-check/

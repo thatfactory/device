@@ -1,8 +1,8 @@
 import XCTest
+
 @testable import Device
 
 @MainActor final class DeviceTests: XCTestCase {
-
     func testIsLoggingEnabledByDefault() {
         XCTAssertTrue(Device().isLoggingEnabled)
     }

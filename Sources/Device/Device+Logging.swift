@@ -1,5 +1,5 @@
-import Foundation
 import AppLogger
+import Foundation
 
 /// `Device` logging categories used to group log output.
 ///
@@ -12,28 +12,26 @@ public enum DeviceLoggingCategory: String {
 
 // MARK: - Interface
 
-public extension Device {
-
+extension Device {
     // MARK: Enable / Disable Logging
 
     /// Enables logging output via `AppLogger`.
     ///
     /// When logging is enabled, output is available in Xcode's Console and in
     /// the macOS Console app under subsystem `com.thatfactory.Device`.
-    func enableLogging() {
+    public func enableLogging() {
         isLoggingEnabled = true
     }
 
     /// Disables logging output.
-    func disableLogging() {
+    public func disableLogging() {
         isLoggingEnabled = false
     }
 }
 
 // MARK: - Internal
 
-internal extension Device {
-
+extension Device {
     /// Logs the given text through `AppLogger`.
     ///
     /// - Parameters:

@@ -11,9 +11,7 @@ Retrieve host device information in a UI-agnostic way.
 
 ## Overview
 
-Use `Device` to inspect runtime platform details, including operating system
-version, platform category, screen size, and orientation on supported
-platforms.
+Use `Device` to inspect runtime platform details, including operating system version, platform category, screen size, and orientation on supported platforms.
 
 ## Topics
 
@@ -35,8 +33,7 @@ platforms.
 
 ### Display and Orientation
 
-Use `Device.screenSize` on iOS, Mac Catalyst, and tvOS.
-Use `Device.orientation` on iOS and Mac Catalyst.
+Use `Device.screenSize` on iOS, Mac Catalyst, and tvOS. Use `Device.orientation` on iOS and Mac Catalyst.
 
 ### Logging
 

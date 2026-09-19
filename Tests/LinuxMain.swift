@@ -1,7 +1,6 @@
+import DeviceTests
 import XCTest
 
-import DeviceTests
-
-var tests = [XCTestCaseEntry]()
+var tests: [XCTestCaseEntry] = []
 tests += DeviceTests.allTests()
 XCTMain(tests)

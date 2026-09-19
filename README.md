@@ -11,8 +11,7 @@
 
 # Device 📱
 
-`Device` is a lightweight Swift package for retrieving host device information,
-such as platform type, operating system version, screen size, and orientation.
+`Device` is a lightweight Swift package for retrieving host device information, such as platform type, operating system version, screen size, and orientation.
 
 API documentation and usage examples are available in [DocC](https://thatfactory.github.io/device/documentation/device/).
 
@@ -32,7 +31,7 @@ In your `Package.swift`, add `Device` as a dependency:
 dependencies: [
     .package(
         url: "https://github.com/thatfactory/device",
-        from: "0.2.4"
+        from: "0.2.5"
     )
 ]
 ```

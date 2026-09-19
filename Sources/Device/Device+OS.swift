@@ -2,7 +2,6 @@ import Foundation
 
 /// Operating system version details for the current host.
 public struct OSVersion {
-
     /// A human-readable operating system description.
     ///
     /// For example, `"Version 10.15.3 (Build 19D76)"`.
@@ -24,8 +23,7 @@ public struct OSVersion {
     public let patch: Int
 }
 
-public extension Device {
-
+extension Device {
     /// Returns the operating system version.
     ///
     /// This value is derived from `ProcessInfo`.
@@ -46,7 +44,7 @@ public extension Device {
     /// ```
     ///
     /// - Returns: The current operating system version information.
-    func os() -> OSVersion {
+    public func os() -> OSVersion {
         let processInfo = ProcessInfo()
         let operatingSystemVersion = OSVersion(
             description: processInfo.operatingSystemVersionString,

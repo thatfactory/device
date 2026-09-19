@@ -1,7 +1,7 @@
 import Foundation
 
 #if canImport(UIKit)
-import UIKit
+    import UIKit
 #endif
 
 /// A host device category.
@@ -15,8 +15,7 @@ public enum DeviceType: Equatable {
     case watch
 }
 
-public extension DeviceType {
-
+extension DeviceType {
     /// A stable user-facing platform label.
     ///
     /// ```swift
@@ -26,7 +25,7 @@ public extension DeviceType {
     /// let platformLabel = currentType.platformDisplayName
     /// // Example values: "iOS", "tvOS", "macOS".
     /// ```
-    var platformDisplayName: String {
+    public var platformDisplayName: String {
         switch self {
         case .iPhone, .iPad:
             return "iOS"
@@ -46,8 +45,7 @@ public extension DeviceType {
     }
 }
 
-public extension Device {
-
+extension Device {
     /// Returns the current host device type without creating a `Device` instance manually.
     ///
     /// ```swift
@@ -57,7 +55,7 @@ public extension Device {
     /// ```
     ///
     /// - Returns: The current host `DeviceType`.
-    static func currentType() -> DeviceType {
+    public static func currentType() -> DeviceType {
         Device().type()
     }
 
@@ -89,7 +87,7 @@ public extension Device {
     /// ```
     ///
     /// - Returns: A `DeviceType` value for the current runtime platform.
-    func type() -> DeviceType {
+    public func type() -> DeviceType {
         let deviceType: DeviceType
         #if os(tvOS)
             deviceType = .tv
@@ -98,11 +96,11 @@ public extension Device {
         #elseif os(macOS)
             deviceType = .mac(isCatalyst: false)
         #elseif os(iOS)
-        #if targetEnvironment(macCatalyst)
-            deviceType = .mac(isCatalyst: true)
-        #else
-            deviceType = UIDevice.current.userInterfaceIdiom == .pad ? .iPad : .iPhone
-        #endif
+            #if targetEnvironment(macCatalyst)
+                deviceType = .mac(isCatalyst: true)
+            #else
+                deviceType = UIDevice.current.userInterfaceIdiom == .pad ? .iPad : .iPhone
+            #endif
         #elseif os(visionOS)
             deviceType = .vision
         #else
